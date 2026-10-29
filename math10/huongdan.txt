@@ -1,0 +1,9 @@
+sau khi tải file về hãy vào thư mục ".streamlit" và tạo một txt tên "" r save as
+với nội dung trong "secrets.toml" là 
+GEMINI_API_KEY = "API key gemini"
+nhập key vào "API key gemini"
+lấy key miễn phí từ Google AI Studio r đặt vào "secrets.toml"
+cách lấy:
+truy cập vào https://aistudio.google.com/api-keys
+nhấn CREATE AN API KEY ở phía tay phải góc trên màn hình
+tạo xg copy key.

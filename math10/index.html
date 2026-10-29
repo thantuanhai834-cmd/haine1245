@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socratic Math-Tutor 10 (HTML Demo)</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #ffffff;
+        --primary: #2563eb;
+        --primary-soft: #dbeafe;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --danger: #b91c1c;
+        --success: #15803d;
+        --border: #e5e7eb;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .app {
+        max-width: 980px;
+        margin: 24px auto;
+        padding: 0 16px 40px;
+      }
+
+      .topbar {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+
+      .topbar h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+      }
+
+      .controls {
+        padding: 16px;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr auto;
+        gap: 12px;
+        align-items: end;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      input, select, button, textarea {
+        width: 100%;
+        font: inherit;
+      }
+
+      input, select, textarea {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 12px;
+        background: #fff;
+        color: var(--text);
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        background: var(--primary);
+        color: white;
+        padding: 11px 16px;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      button.secondary {
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+
+      .chat {
+        margin-top: 18px;
+        padding: 16px;
+      }
+
+      .messages {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 260px;
+        max-height: 520px;
+        overflow: auto;
+        padding-right: 8px;
+      }
+
+      .msg {
+        max-width: 82%;
+        padding: 12px 14px;
+        border-radius: 14px;
+        line-height: 1.55;
+        white-space: pre-wrap;
+      }
+
+      .msg.user {
+        align-self: flex-end;
+        background: var(--primary-soft);
+        color: var(--text);
+      }
+
+      .msg.assistant {
+        align-self: flex-start;
+        background: #f3f4f6;
+      }
+
+      .composer {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .composer textarea {
+        min-height: 52px;
+        max-height: 160px;
+        resize: vertical;
+      }
+
+      .status {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+
+      .status.error { color: var(--danger); }
+      .status.success { color: var(--success); }
+
+      @media (max-width: 700px) {
+        .controls {
+          grid-template-columns: 1fr;
+        }
+        .msg { max-width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="topbar">
+        <h1>Socratic Math-Tutor 10</h1>
+        <button class="secondary" id="clearBtn" type="button">Bài mới</button>
+      </div>
+
+      <div class="panel controls">
+        <div>
+          <label for="apiKey">Khóa API</label>
+          <input id="apiKey" type="password" placeholder="Dán khóa API ở đây" />
+        </div>
+
+        <div>
+          <label for="topic">Chủ đề</label>
+          <select id="topic"></select>
+        </div>
+
+        <div>
+          <label>&nbsp;</label>
+          <button id="saveKeyBtn" type="button">Lưu khóa</button>
+        </div>
+      </div>
+
+      <div class="panel chat">
+        <div class="messages" id="messages"></div>
+        <div class="composer">
+          <textarea id="prompt" placeholder="Nhập đề bài hoặc câu trả lời của em..."></textarea>
+          <button id="sendBtn" type="button">Gửi</button>
+        </div>
+        <div class="status" id="status">Chưa có khóa API. Hãy nhập khóa và gõ bài toán.</div>
+      </div>
+    </div>
+
+    <script src="demo.js"></script>
+  </body>
+</html>
